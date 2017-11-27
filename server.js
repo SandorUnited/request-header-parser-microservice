@@ -5,9 +5,9 @@ var app = express();
 
 app.get("/", function (req, res) {
   var header = req.headers;
-  var userAgent = header["user-agent"];
-  var language = header["accept-language"];
-  var ip =  req.headers['x-forwarded-for'];
+  var userAgent = header["user-agent"].split('A')[0].slice(0, -1);
+  var language = header["accept-language"].split(',')[0];
+  var ip =  req.headers['x-forwarded-for'].split(',')[0];
   var object = {language, userAgent, ip}
   res.send(object);
   
